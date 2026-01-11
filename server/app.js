@@ -39,10 +39,12 @@ export class GigFlowServer {
 		this.io.on('connection', (socket) => {
 			console.log(chalk.yellow(`⚡ Socket Connected: ${socket.id}`));
 			
-			socket.on('join_user_room', (userId) => {
+			// Auto-join user to their room based on auth
+			const userId = socket.handshake.auth.userId;
+			if (userId) {
 				socket.join(userId);
-				console.log(`👤 User ${userId} joined their room`);
-			});
+				console.log(chalk.green(`👤 User ${userId} joined their room`));
+			}
 
 			socket.on('disconnect', () => {
 				console.log(chalk.yellow(`⚡ Socket Disconnected: ${socket.id}`));

@@ -1,5 +1,5 @@
 import express from 'express';
-import { createBid, getBidsByGig, hireFreelancer } from '../controllers/bid.controller.js';
+import { createBid, getBidsByGig, hireFreelancer, getMyBids } from '../controllers/bid.controller.js';
 import { protect } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
@@ -50,6 +50,22 @@ const router = express.Router();
  *         description: Server error
  */
 router.post('/', protect, createBid);
+
+/**
+ * @swagger
+ * /api/bids/my-bids:
+ *   get:
+ *     summary: Get my submitted bids
+ *     tags: [Bids]
+ *     security:
+ *       - cookieAuth: []
+ *     responses:
+ *       200:
+ *         description: List of my bids
+ *       401:
+ *         description: Not authorized
+ */
+router.get('/my-bids', protect, getMyBids);
 
 /**
  * @swagger

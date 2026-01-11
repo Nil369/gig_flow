@@ -2,9 +2,14 @@ import rateLimit from "express-rate-limit";
 
 export const whitelist = [
   "http://localhost:3000",
+  "http://localhost:3001",
+  "http://localhost:5173",
   "http://localhost:5173/",
+  "http://localhost:5174",
   "http://localhost:5174/",
+  "http://localhost:5000",
   "http://localhost:5000/",
+  "http://localhost:5050",
   "http://localhost:5050/",
   /\.akashhalder\.in$/,
   /\.akashhalder\.in\/$/,

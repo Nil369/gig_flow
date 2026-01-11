@@ -1,5 +1,5 @@
 import express from 'express';
-import { getGigs, createGig } from '../controllers/gig.controller.js';
+import { getGigs, createGig, getMyGigs, getGigById } from '../controllers/gig.controller.js';
 import { protect } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
@@ -67,5 +67,41 @@ router.get('/', getGigs);
  *         description: Server error
  */
 router.post('/', protect, createGig);
+
+/**
+ * @swagger
+ * /api/gigs/my-gigs:
+ *   get:
+ *     summary: Get my posted gigs
+ *     tags: [Gigs]
+ *     security:
+ *       - cookieAuth: []
+ *     responses:
+ *       200:
+ *         description: List of my gigs
+ *       401:
+ *         description: Not authorized
+ */
+router.get('/my-gigs', protect, getMyGigs);
+
+/**
+ * @swagger
+ * /api/gigs/:id:
+ *   get:
+ *     summary: Get a single gig by ID
+ *     tags: [Gigs]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Gig details
+ *       404:
+ *         description: Gig not found
+ */
+router.get('/:id', getGigById);
 
 export default router;

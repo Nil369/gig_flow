@@ -46,3 +46,32 @@ export const createGig = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// @desc    Get my gigs
+// @route   GET /api/gigs/my-gigs
+// @access  Private
+export const getMyGigs = async (req, res) => {
+  try {
+    const gigs = await Gig.find({ ownerId: req.user._id }).populate('ownerId', 'name email').sort({ createdAt: -1 });
+    res.json({ gigs });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// @desc    Get gig by ID
+// @route   GET /api/gigs/:id
+// @access  Public
+export const getGigById = async (req, res) => {
+  try {
+    const gig = await Gig.findById(req.params.id).populate('ownerId', 'name email');
+    
+    if (!gig) {
+      return res.status(404).json({ message: 'Gig not found' });
+    }
+
+    res.json({ gig });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

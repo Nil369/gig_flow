@@ -128,13 +128,47 @@ export const hireFreelancer = async (req, res) => {
     // Emit Socket.io event
     const io = req.app.get('io');
     if (io) {
-        io.to(bid.freelancerId.toString()).emit('notification', `You have been hired for ${gig.title}`);
+        // Notify the hired freelancer
+        io.to(bid.freelancerId.toString()).emit('hired', {
+            gigTitle: gig.title,
+            message: `You have been hired for "${gig.title}"!`
+        });
+
+        // Notify rejected bidders
+        const rejectedBids = await Bid.find({ 
+            gigId: gig._id, 
+            _id: { $ne: bid._id },
+            status: 'rejected'
+        });
+
+        rejectedBids.forEach((rejectedBid) => {
+            io.to(rejectedBid.freelancerId.toString()).emit('bidRejected', {
+                gigTitle: gig.title,
+                message: `Your bid for "${gig.title}" was not selected`
+            });
+        });
     }
 
     res.json({ message: 'Freelancer hired successfully', bid });
   } catch (error) {
     // await session.abortTransaction();
     // session.endSession();
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// @desc    Get my bids
+// @route   GET /api/bids/my-bids
+// @access  Private
+export const getMyBids = async (req, res) => {
+  try {
+    const bids = await Bid.find({ freelancerId: req.user._id })
+      .populate('gigId', 'title description budget status ownerId')
+      .populate('freelancerId', 'name email')
+      .sort({ createdAt: -1 });
+    
+    res.json({ bids });
+  } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };

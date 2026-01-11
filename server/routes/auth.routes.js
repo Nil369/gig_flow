@@ -3,7 +3,9 @@ import {
   registerUser,
   loginUser,
   logoutUser,
+  getMe,
 } from '../controllers/auth.controller.js';
+import { protect } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
@@ -88,5 +90,23 @@ router.post('/login', loginUser);
  *         description: Logged out successfully
  */
 router.post('/logout', logoutUser);
+
+/**
+ * @swagger
+ * /api/auth/me:
+ *   get:
+ *     summary: Get current user
+ *     tags: [Auth]
+ *     security:
+ *       - cookieAuth: []
+ *     responses:
+ *       200:
+ *         description: Current user data
+ *       401:
+ *         description: Not authorized
+ *       404:
+ *         description: User not found
+ */
+router.get('/me', protect, getMe);
 
 export default router;
