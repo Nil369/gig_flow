@@ -1,4 +1,5 @@
-import { GigFlow } from "./app.js";
+import { GigFlowServer } from "./app.js";
 
-const server = new GigFlow()
-server.start()
+const server = new GigFlowServer();
+
+server.start();
