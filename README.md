@@ -42,14 +42,46 @@ A full-stack freelance marketplace platform built with React, Node.js, Express, 
 - **bcrypt** for password hashing
 - **Helmet** & **compression** for security and performance
 
-## 📦 Installation
+## � Prerequisites
 
-### Prerequisites
-- Node.js (v16 or higher)
+Before you begin, ensure you have the following installed on your system:
+
+- **Node.js** (v20 or higher) - Required for local development and running the application manually.
+- **Docker Desktop** - Required for containerized deployment and running with Docker Compose.
+- **Git** - To clone the repository.
+- **MongoDB** (Optional) - If you plan to run a local database instance instead of using the Dockerized one or Atlas.
+
+## �📦 Installation & Setup
+
+### Quick Start (Recommended)
+
+We provide setup scripts for one-click initialization. These scripts copy environment files and launch the application using Docker Compose.
+
+**Linux / macOS:**
+```bash
+chmod +x setup.sh
+./setup.sh
+```
+
+**Windows:**
+```bash
+setup.bat
+```
+
+### Docker Setup
+1. Create `.env` files from examples in both client and server directories.
+2. Run:
+   ```bash
+   docker-compose up --build
+   ```
+
+### Manual Setup (No Docker)
+
+#### Prerequisites
+- Node.js (v20 or higher)
 - MongoDB (local or Atlas)
-- npm or yarn
 
-### Backend Setup
+#### Backend Setup
 
 1. Navigate to the server directory:
 ```bash
@@ -66,7 +98,7 @@ npm install
 MONGODB_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret_key
 NODE_ENV=development
-PORT=5000
+PORT=3001
 ```
 
 4. Start the server:
@@ -75,8 +107,9 @@ npm run dev
 ```
 
 The server will run on `http://localhost:3001`
+**API Docs:** visit `http://localhost:3001/docs`
 
-### Frontend Setup
+#### Frontend Setup
 
 1. Navigate to the client directory:
 ```bash
@@ -125,21 +158,6 @@ The client will run on `http://localhost:5173`
 - **Helmet.js**: Security headers
 - **Input Validation**: Server-side validation for all endpoints
 
-## 🎨 UI Components Used
-
-- Cards, Buttons, Inputs, Textareas
-- Badges, Dialogs, Dropdowns
-- Tabs, Avatars, Separators
-- Skeletons, Scroll Areas
-- Toast Notifications (Sonner)
-
-## 📱 Responsive Design
-
-The application is fully responsive with breakpoints:
-- Mobile: < 768px
-- Tablet: 768px - 1024px
-- Desktop: > 1024px
-
 ## 🔄 Real-time Features
 
 Socket.IO implementation includes:
@@ -150,6 +168,10 @@ Socket.IO implementation includes:
 - Unread notification badge counter
 
 ## 🌐 API Endpoints
+
+### 📚 API Documentation (Swagger)
+Comprehensive interactive API documentation is available when the server is running.
+Visit: `http://localhost:3001/docs`
 
 ### Authentication
 - `POST /api/auth/register` - Register new user
@@ -175,7 +197,11 @@ Socket.IO implementation includes:
 1. ✅ **Transactional Integrity**: Atomic hiring logic with race condition prevention. 
 2. ✅ **Real-time Updates**: Socket.IO notifications for hiring and rejections
 
-> Note: Transactional Feature will not work for local mongodb server.
+### ⚠️ Important Note on Transactions
+
+I have fully implemented **Atomic Transactions** for the hiring process to ensure data integrity and prevent race conditions. However, this feature is currently **commented out** in the code (`server/controllers/bid.controller.js`).
+
+**Reason:** MongoDB Transactions require a Replica Set (not available on standalone local instances) or a paid/dedicated Atlas cluster. Since I am running multiple apps on my MongoDB Atlas **Free Tier** and do not want to exhaust the connection/operation limits, I have disabled this feature by default. To enable it, uncomment the transaction lines in `bid.controller.js` and ensure you are connected to a MongoDB Replica Set.
 
 ### Key Features
 - Context API for state management
@@ -191,10 +217,3 @@ Socket.IO implementation includes:
 - Payment integration
 - Chat system between clients and freelancers
 - Advanced search filters
-- Email notifications
-
-## 🙏 Acknowledgments
-
-- [shadcn/ui](https://ui.shadcn.com/) for beautiful components
-- [Aceternity UI](https://ui.aceternity.com/) for design inspiration
-
