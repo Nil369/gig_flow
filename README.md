@@ -42,7 +42,7 @@ A full-stack freelance marketplace platform built with React, Node.js, Express, 
 - **bcrypt** for password hashing
 - **Helmet** & **compression** for security and performance
 
-## � Prerequisites
+## 📌 Prerequisites
 
 Before you begin, ensure you have the following installed on your system:
 
@@ -50,6 +50,8 @@ Before you begin, ensure you have the following installed on your system:
 - **Docker Desktop** - Required for containerized deployment and running with Docker Compose.
 - **Git** - To clone the repository.
 - **MongoDB** (Optional) - If you plan to run a local database instance instead of using the Dockerized one or Atlas.
+
+---
 
 ## 📦 Installation & Setup
 
