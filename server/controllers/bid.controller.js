@@ -40,6 +40,16 @@ export const createBid = async (req, res) => {
       price,
     });
 
+    // Emit Socket.io event to notify gig owner about new bid
+    const io = req.app.get('io');
+    if (io) {
+      io.to(gig.ownerId.toString()).emit('newBid', {
+        gigTitle: gig.title,
+        freelancerName: req.user.name,
+        bidAmount: price,
+      });
+    }
+
     res.status(201).json(bid);
   } catch (error) {
     res.status(500).json({ message: error.message });

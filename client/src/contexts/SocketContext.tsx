@@ -65,6 +65,23 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         });
       });
 
+      newSocket.on('newBid', (data: { gigTitle: string; freelancerName: string; bidAmount: number }) => {
+        const notification: Notification = {
+          id: Date.now().toString(),
+          message: `New bid received from ${data.freelancerName}`,
+          type: 'info',
+          gigTitle: data.gigTitle,
+          timestamp: new Date(),
+        };
+
+        setNotifications((prev) => [notification, ...prev]);
+        
+        toast.success('🎯 New Bid Received!', {
+          description: `${data.freelancerName} bid ₹${data.bidAmount} on "${data.gigTitle}"`,
+          duration: 5000,
+        });
+      });
+
       setSocket(newSocket);
 
       return () => {

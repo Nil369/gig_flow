@@ -51,11 +51,13 @@ Before you begin, ensure you have the following installed on your system:
 - **Git** - To clone the repository.
 - **MongoDB** (Optional) - If you plan to run a local database instance instead of using the Dockerized one or Atlas.
 
-## �📦 Installation & Setup
+## 📦 Installation & Setup
 
 ### Quick Start (Recommended)
 
 We provide setup scripts for one-click initialization. These scripts copy environment files and launch the application using Docker Compose.
+
+> Note: Make sure that your **Docker Engine / Docker Desktop** is **running!**
 
 **Linux / macOS:**
 ```bash
