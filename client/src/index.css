@@ -202,3 +202,14 @@
   background: rgb(82 82 91); /* zinc-600 */
 }
 
+/* Custom Text-Selection */
+::selection {
+  background-color: #8cc2ff84;
+  color: #002858;
+}
+
+/* Dark mode selection color */
+.dark ::selection {
+  background-color: #2b5c9d9b;
+  color: #fafcff;
+}

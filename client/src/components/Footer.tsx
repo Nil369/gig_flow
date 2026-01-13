@@ -10,9 +10,9 @@ export const Footer = () => {
           {/* Brand */}
           <div className="space-y-4">
             <Link to="/" className="flex items-center space-x-2 group">
-              <img 
-                src="/logo.png" 
-                alt="GigFlow Logo" 
+              <img
+                src="/logo.png"
+                alt="GigFlow Logo"
                 className="h-10 w-10 object-contain group-hover:scale-105 transition-all drop-shadow-lg"
               />
               <span className="font-bold text-xl text-gray-900 dark:text-white tracking-tight">
@@ -83,19 +83,22 @@ export const Footer = () => {
             <h3 className="font-bold text-gray-900 dark:text-white">Connect</h3>
             <div className="flex space-x-4">
               <a
-                href="#"
+                href="https://github.com/Nil369/gig_flow"
+                target='_blank'
                 className="text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
               >
                 <Github className="h-5 w-5" />
               </a>
               <a
-                href="#"
+                href="https://x.com/HalderXi"
+                target='_blank'
                 className="text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
               >
                 <Twitter className="h-5 w-5" />
               </a>
               <a
-                href="#"
+                href="https://www.linkedin.com/in/akash-halder-nil/"
+                target='_blank'
                 className="text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
               >
                 <Linkedin className="h-5 w-5" />
