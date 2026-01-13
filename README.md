@@ -42,7 +42,7 @@ A full-stack freelance marketplace platform built with React, Node.js, Express, 
 - **bcrypt** for password hashing
 - **Helmet** & **compression** for security and performance
 
-## 📌 Prerequisites
+## 📌 **Prerequisites**
 
 Before you begin, ensure you have the following installed on your system:
 
@@ -59,7 +59,7 @@ Before you begin, ensure you have the following installed on your system:
 
 We provide setup scripts for one-click initialization. These scripts copy environment files and launch the application using Docker Compose.
 
-> Note: Make sure that your **Docker Engine / Docker Desktop** is **running!**
+> Note: Make sure that your **[Docker Engine / Docker Desktop](https://www.docker.com/)** is **running!**
 
 **Linux / macOS:**
 ```bash
@@ -69,15 +69,10 @@ chmod +x setup.sh
 
 **Windows:**
 ```bash
-setup.bat
+./setup.bat
 ```
 
-### Docker Setup
-1. Create `.env` files from examples in both client and server directories.
-2. Run:
-   ```bash
-   docker-compose up --build
-   ```
+---
 
 ### Manual Setup (No Docker)
 
